@@ -1,0 +1,28 @@
+---
+- name: Include ./install.yml
+  ansible.builtin.import_tasks: install.yml
+  tags:
+    - install_strongswan
+    - install
+
+- name: Include ./configure.yml
+  ansible.builtin.import_tasks: configure.yml
+  tags:
+    - configure_strongswan
+    - configure
+
+# - name: Include ./s2s.yml
+#   when: strongswan.s2s is defined
+#   ansible.builtin.import_tasks: s2s.yml
+#   tags:
+#     - s2s_strongswan
+#     - s2s
+#     - tunnels_strongswan
+#     - tunnels
+
+- name: Include ./vpn.yml
+  when: strongswan.vpn is defined
+  ansible.builtin.import_tasks: vpn.yml
+  tags:
+    - vpn_strongswan
+    - vpn

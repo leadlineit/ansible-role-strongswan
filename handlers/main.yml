@@ -1,0 +1,15 @@
+---
+- name: Restart strongswan service
+  ansible.builtin.service:
+    name: ipsec
+    state: restarted
+
+- name: Reload strongswan service
+  ansible.builtin.service:
+    name: ipsec
+    state: reloaded
+
+- name: Reload apparmor service
+  ansible.builtin.service:
+    name: apparmor
+    state: reloaded

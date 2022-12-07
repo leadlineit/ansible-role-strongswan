@@ -1,0 +1,75 @@
+---
+- name: Update repo cache and install a few prerequisite packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - certbot
+
+- name: Create directories for vpn config and secrets file(s)
+  ansible.builtin.file: 
+    path: "{{ item }}"
+    state: directory
+    mode: '0750'
+    owner: root
+    group: root
+  with_items:
+    - /etc/ipsec.conf.d/vpn
+    - /etc/ipsec.secrets.d/vpn
+
+- name: Add configuration file(s) for vpn
+  no_log: true
+  ansible.builtin.template:
+    src: vpn.j2
+    dest: "/etc/ipsec.conf.d/vpn/{{ item.name }}.conf"
+    mode: '0644'
+    owner: root
+    group: root
+  with_items: "{{ strongswan.vpn }}"
+  notify:
+    - Reload strongswan service
+
+- name: Add secrets file(s) for vpn
+  no_log: true
+  ansible.builtin.template:
+    src: vpn-secret.j2
+    dest: "/etc/ipsec.secrets.d/vpn/{{ item.name }}.conf"
+    mode: '0644'
+    owner: root
+    group: root
+  with_items: "{{ strongswan.vpn }}"
+  notify:
+    - Reload strongswan service
+
+- name: Find unmanaged vpn configuration file(s)
+  ansible.builtin.find:
+    paths: /etc/ipsec.conf.d/vpn
+    file_type: file
+    excludes: "{{ strongswan.vpn | map(attribute='name') | product(['.conf']) | map('join') | flatten }}"
+  register: vpnout_conf
+
+- name: Remove unmanaged vpn configuration file(s)
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ vpnout_conf.files | map(attribute='path') | unique }}"
+  notify:
+    - Reload strongswan service
+
+- name: Find unmanaged vpn secrets file(s)
+  ansible.builtin.find:
+    paths: /etc/ipsec.secrets.d/vpn
+    file_type: file
+    excludes: "{{ strongswan.vpn | map(attribute='name') | product(['.conf']) | map('join') | flatten }}"
+  register: vpnout_sec
+
+- name: Remove unmanaged vpn secrets file(s)
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ vpnout_sec.files | map(attribute='path') | unique }}"
+  notify:
+    - Reload strongswan service

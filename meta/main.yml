@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  role_name: strongswan
+  namespace: leadlineit
+  author: Artem Kasianchuk
+  description: Install and configure IPsec-based VPN solution with strongSwan
+  license: MIT
+  min_ansible_version: '2.10'
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+        - buster
+        - stretch
+  galaxy_tags:
+    - system
+    - debian
+    - vpn
+    - ipsec
+    - s2s
+    - tunnels
+    - strongswan

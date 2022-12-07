@@ -1,0 +1,34 @@
+{{ ansible_managed }}
+
+conn {{ item.name }}
+    left = {{ item.left | default("%any") }}
+    leftsubnet = {{ item.leftsubnet }} 
+    leftcert = {{ item.leftcert | default("fullchain.pem") }} 
+    leftfirewall = {{ item.leftfirewall | default("yes") }}
+    leftsendcert = {{ item.leftsendcert | default("always") }}
+    right = {{ item.right | default("%any") }}
+    rightsourceip = {{ item.rightsourceip }}
+    rightdns = {{ item.rightdns | default("8.8.8.8,8.8.4.4") }}
+    rightsendcert = {{ item.rightsendcert | default("never") }}
+    ike = {{ item.ike | default("aes256-sha256-modp2048,aes192-sha256-modp2048,aes128-sha256-modp2048!") }}
+    keyexchange = {{ item.keyexchange | default("ikev2") }}
+    esp = {{ item.esp | default("aes256-sha256-modp2048,aes192-sha256-modp2048,aes128-sha256-modp2048,aes256-sha1-modp2048,aes192-sha1-modp2048,aes128-sha1-modp2048!") }}
+    rekey = {{ item.rekey | default("no") }}
+    fragmentation = {{ item.fragmentation | default("yes") }}
+    dpdaction = {{ item.dpdaction | default("clear") }}
+    dpdtimeout = {{ item.dpdtimeout | default("300s") }}
+    dpddelay = {{ item.dpddelay | default("60s") }}
+    eap_identity = %identity
+    
+# BlackBerry, Windows, Android
+conn {{ item.name }}-EAP
+    also = {{ item.name }}
+    rightauth = eap-mschapv2
+    auto = add
+
+# macOS, iOS
+conn {{ item.name }}-Apple
+    also = {{ item.name }}
+    leftid = @{{ item.name | default("{{ inventory_hostname }}") }}
+    rightauth = eap-mschapv2
+    auto = add
