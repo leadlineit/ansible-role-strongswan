@@ -57,7 +57,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install ansible \
+          pip install ansible==6.7.0 \
           ansible-lint \
           molecule[docker,lint] \
           flake8 \
