@@ -16,7 +16,7 @@ defaults:
 jobs:
   lint:
     name: Linting the syntax
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -36,7 +36,7 @@ jobs:
           yamllint .
   test:
     name: Molecule tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       - lint
     strategy:
@@ -57,9 +57,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install ansible==6.7.0 \
+          pip install ansible \
           ansible-lint \
-          molecule[docker,lint]==4.0.3 \
+          molecule[docker,lint] \
           flake8 \
           yamllint \
           docker
@@ -75,7 +75,7 @@ jobs:
     name: Release
     needs:
       - test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: checkout
         uses: actions/checkout@v2
