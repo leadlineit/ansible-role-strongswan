@@ -59,7 +59,7 @@ jobs:
           pip install --upgrade pip
           pip install ansible==6.7.0 \
           ansible-lint \
-          molecule[docker,lint] \
+          molecule[docker,lint]==4.0.3 \
           flake8 \
           yamllint \
           docker
