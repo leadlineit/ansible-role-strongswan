@@ -43,7 +43,7 @@ jobs:
       matrix:
         distro:
           # - bullseye
-          - buster
+          # - buster
           - stretch
     steps:
       - name: checkout
