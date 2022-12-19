@@ -2,15 +2,16 @@
 - name: Converge
   hosts: all
   # gather_facts: false
+  become: true
   tasks:
-    # - name: Install requirements
-    #   ansible.builtin.apt:
-    #     name: "{{ item }}"
-    #     state: present
-    #     update_cache: true
-    #   with_items:
-    #     - gnupg
-    #     - procps   ### For use systcl in role
+    - name: Install requirements
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: true
+      with_items:
+        - gnupg
+        - procps   ### For use systcl in role
     - name: "Include leadlineit.strongswan"
       ansible.builtin.include_role:
         name: "leadlineit.strongswan"
