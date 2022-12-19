@@ -1,8 +1,6 @@
 ---
 - name: Converge
   hosts: all
-  become: true
-  become_user: root
   tasks:
     - name: Install requirements
       ansible.builtin.apt:
