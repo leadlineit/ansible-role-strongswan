@@ -42,8 +42,8 @@ jobs:
     strategy:
       matrix:
         distro:
-          # - bullseye
-          # - buster
+          - bullseye
+          - buster
           - stretch
     steps:
       - name: checkout
