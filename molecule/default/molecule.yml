@@ -4,7 +4,7 @@ dependency:
 provisioner:
   name: ansible
   env:
-    ANSIBLE_VERBOSITY: 3
+    ANSIBLE_VERBOSITY: 5
 verifier:
   name: ansible
 driver:
