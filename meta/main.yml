@@ -5,7 +5,7 @@ galaxy_info:
   author: Artem Kasianchuk
   description: Install and configure IPsec-based VPN solution with strongSwan
   license: MIT
-  min_ansible_version: '2.10'
+  min_ansible_version: '2.11'
   platforms:
     - name: Debian
       versions:
