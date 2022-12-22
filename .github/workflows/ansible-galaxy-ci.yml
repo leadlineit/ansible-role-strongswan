@@ -58,15 +58,15 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install ansible==6.7.0 \
-          ansible-lint==6.10.0 \
+          pip install ansible \
+          ansible-lint \
           molecule[docker,lint] \
-          flake8==6.0.0 \
-          yamllint==1.28.0 \
-          docker==6.0.1
+          flake8 \
+          yamllint \
+          docker
       - name: Test with molecule
         run: |
-          molecule --debug test
+          molecule test
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'

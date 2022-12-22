@@ -3,8 +3,6 @@ dependency:
   name: galaxy
 provisioner:
   name: ansible
-  env:
-    ANSIBLE_VERBOSITY: 5
 verifier:
   name: ansible
 driver:
