@@ -16,7 +16,7 @@ defaults:
 jobs:
   lint:
     name: Linting the syntax
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -37,7 +37,7 @@ jobs:
 
   test:
     name: Molecule tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs:
       - lint
     strategy:
@@ -58,12 +58,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install ansible \
-          ansible-lint \
+          pip install ansible==6.7.0 \
+          ansible-lint==6.10.0 \
           molecule[docker,lint] \
-          flake8 \
-          yamllint \
-          docker
+          flake8==6.0.0 \
+          yamllint==1.28.0 \
+          docker==6.0.1
       - name: Test with molecule
         run: |
           molecule --debug test
@@ -76,7 +76,7 @@ jobs:
     name: Release
     needs:
       - test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: checkout
         uses: actions/checkout@v3
