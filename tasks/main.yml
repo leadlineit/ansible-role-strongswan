@@ -11,14 +11,14 @@
     - configure_strongswan
     - configure
 
-# - name: Include ./s2s.yml
-#   when: strongswan.s2s is defined
-#   ansible.builtin.import_tasks: s2s.yml
-#   tags:
-#     - s2s_strongswan
-#     - s2s
-#     - tunnels_strongswan
-#     - tunnels
+- name: Include ./s2s.yml
+  when: strongswan.s2s is defined
+  ansible.builtin.import_tasks: s2s.yml
+  tags:
+    - s2s_strongswan
+    - s2s
+    - tunnels_strongswan
+    - tunnels
 
 - name: Include ./vpn.yml
   when: strongswan.vpn is defined

@@ -8,7 +8,7 @@ This role helps to for install and configure IPsec-based VPN solution with stron
 Requirements
 ------------
 
-This role requires Ansible 2.10 or higher.
+This role requires Ansible 2.11 or higher.
 
 Role Variables
 --------------
