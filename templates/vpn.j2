@@ -12,7 +12,6 @@ conn {{ item.name }}
     rightsendcert = {{ item.rightsendcert | default("never") }}
     ike = {{ item.ike | default("aes256-sha256-modp2048,aes192-sha256-modp2048,aes128-sha256-modp2048!") }}
     keyexchange = {{ item.keyexchange | default("ikev2") }}
-    esp = {{ item.esp | default("aes256-sha256-modp2048,aes192-sha256-modp2048,aes128-sha256-modp2048,aes256-sha1-modp2048,aes192-sha1-modp2048,aes128-sha1-modp2048!") }}
     rekey = {{ item.rekey | default("no") }}
     fragmentation = {{ item.fragmentation | default("yes") }}
     dpdaction = {{ item.dpdaction | default("clear") }}
@@ -23,6 +22,7 @@ conn {{ item.name }}
 # BlackBerry, Windows, Android
 conn {{ item.name }}-EAP
     also = {{ item.name }}
+    esp = {{ item.esp | default("aes256-sha256-modp2048,aes192-sha256-modp2048,aes128-sha256-modp2048,aes256-sha1-modp2048,aes192-sha1-modp2048,aes128-sha1-modp2048!") }}
     rightauth = eap-mschapv2
     auto = add
 
