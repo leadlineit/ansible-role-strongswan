@@ -1,5 +1,5 @@
 ---
-- name: Update repo cache and install a few prerequisite packages
+- name: Update repo cache and install a certbot package
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
@@ -19,7 +19,7 @@
     - /etc/ipsec.secrets.d/vpn
 
 - name: Add configuration file(s) for vpn
-  no_log: true
+  # no_log: true
   ansible.builtin.template:
     src: vpn.j2
     dest: "/etc/ipsec.conf.d/vpn/{{ item.name }}.conf"
@@ -31,7 +31,7 @@
     - Reload strongswan service
 
 - name: Add secrets file(s) for vpn
-  no_log: true
+  # no_log: true
   ansible.builtin.template:
     src: vpn-secret.j2
     dest: "/etc/ipsec.secrets.d/vpn/{{ item.name }}.conf"
