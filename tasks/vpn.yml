@@ -40,7 +40,7 @@
     group: root
   with_items: "{{ strongswan.vpn }}"
   notify:
-    - Reload strongswan service
+    - Rereadsecrets of strongswan service
 
 - name: Find unmanaged vpn configuration file(s)
   ansible.builtin.find:
@@ -72,4 +72,4 @@
   with_items:
     - "{{ vpnout_sec.files | map(attribute='path') | unique }}"
   notify:
-    - Reload strongswan service
+    - Rereadsecrets of strongswan service

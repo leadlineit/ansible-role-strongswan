@@ -9,6 +9,9 @@
     name: ipsec
     state: reloaded
 
+- name: Rereadsecrets of strongswan service
+  ansible.builtin.command: ipsec rereadsecrets
+
 - name: Reload apparmor service
   ansible.builtin.service:
     name: apparmor
