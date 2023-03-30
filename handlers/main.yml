@@ -11,6 +11,7 @@
 
 - name: Rereadsecrets of strongswan service
   ansible.builtin.command: ipsec rereadsecrets
+  changed_when: false
 
 - name: Reload apparmor service
   ansible.builtin.service:
