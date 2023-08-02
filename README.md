@@ -1,9 +1,16 @@
-# Ansible Role Strongswan
+# Ansible Galaxy role for install and configure IPsec-based VPN solution with strongSwan.
 
 ![Build Status](https://github.com/leadlineit/ansible-role-strongswan/actions/workflows/ansible-galaxy-ci.yml/badge.svg)
 [![Galaxy Role](https://img.shields.io/badge/Ansible--Galaxy-leadlineit.strongswan-blue.svg?logo=ansible&logoColor=white)](https://galaxy.ansible.com/leadlineit/strongswan/)
 
-This role helps to for install and configure IPsec-based VPN solution with strongSwan on a Debian (stretch/buster/bullseye).
+This role helps to for install and configure IPsec-based VPN solution with strongSwan.
+
+Supported OSes
+--------------
+- Debian 12 (bookworm)
+- Debian 11 (bullseye)
+- Debian 10 (buster)
+- Debian 9 (stretch)
 
 Requirements
 ------------

@@ -38,7 +38,8 @@
     mode: '0644'
     owner: root
     group: root
-  with_items: "{{ strongswan_logs | default([]) }}"
+  with_items:
+    - "{{ strongswan_logs | default([]) }}"
 
 - name: Activate logrotate for strongswan charon
   ansible.builtin.blockinfile:

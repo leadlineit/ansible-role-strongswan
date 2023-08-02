@@ -2,7 +2,8 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: Install requirements
+    - name: Install requirements for Debian
+      when: ansible_os_family == 'Debian'
       ansible.builtin.apt:
         name: "{{ item }}"
         state: present
@@ -10,6 +11,6 @@
       with_items:
         - gnupg
         - procps   ### For use systcl in role
-    - name: "Include leadlineit.strongswan"
+    - name: Include leadlineit.strongswan
       ansible.builtin.include_role:
-        name: "leadlineit.strongswan"
+        name: leadlineit.strongswan

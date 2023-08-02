@@ -26,7 +26,8 @@
     mode: '0644'
     owner: root
     group: root
-  with_items: "{{ strongswan.vpn }}"
+  with_items:
+    - "{{ strongswan.vpn }}"
   notify:
     - Reload strongswan service
 
@@ -38,7 +39,8 @@
     mode: '0644'
     owner: root
     group: root
-  with_items: "{{ strongswan.vpn }}"
+  with_items:
+    - "{{ strongswan.vpn }}"
   notify:
     - Rereadsecrets of strongswan service
 
